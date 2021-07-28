@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+</head>
+<body>
+    <header th:insert="navbar :: header"></header>
+<p class="p-3 m-3">Пока система не одобрит кредит, контроллер будет редиректить на эту же страницу.
+    В противном случае перенаправит на страницу, где можно будет подписать договрор.</p>
+<div class="container">
+    <div class="card-body">
+        <h2>Заявка на кредит</h2>
+        <form action="#" th:action="@{LoanRequest/create}" method="post" th:object="${loanRequest}">
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите фамилию" th:field="*{surname}" name="surname"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите имя" th:field="*{name}" name="name"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите отчестов" th:field="*{patronymic}" name="patronymic"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите серию паспорта" th:field="*{passportSeries}" name="passportSeries"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите номер паспорта" th:field="*{passportNumber}" name="passportNumber"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите семейное положение" th:field="*{maritalStatus}" name="maritalStatus"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите адресс прописки" th:field="*{registrationAddress}" name="registrationAddress"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите контактный телефон" th:field="*{phoneNumber}" name="phoneNumber"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="date" placeholder="Введите дату найма" th:field="*{dayEmployment}" name="dayEmployment"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="date" placeholder="Введите дату увольнения" th:field="*{dayDismissal}" name="dayDismissal"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите должность" th:field="*{jobPosition}" name="jobPosition"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите название организации" th:field="*{organizationName}" name="organizationName"><p>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Введите сумму желаемого кредита" th:field="*{loanAmount}" name="loanAmount"><p>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

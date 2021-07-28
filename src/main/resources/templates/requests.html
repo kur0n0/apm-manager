@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+</head>
+<body>
+    <header th:insert="navbar :: header"></header>
+    <h1>Список всех заявок со статусом одобрения</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Данные паспорта</th>
+            <th scope="col">Семейное положение</th>
+            <th scope="col">Адрес прописки</th>
+            <th scope="col">Номер телефона</th>
+            <th scope="col">Период работы</th>
+            <th scope="col">
+                <span>Должность</span>
+                <span>Название организации</span>
+            </th>
+            <th scope="col">Сумма желаемого кредита</th>
+            <th scope="col">Решение</th>
+            <th scope="col">Срок кредита в днях</th>
+            <th scope="col">Одобренная сумма</th>
+
+        </tr>
+        </thead>
+        <tr th:each="dto : ${dtoList}">
+            <td th:text="${dto.loanRequest.getId()}"></td>
+            <td th:text="${dto.loanRequest.getName()}"></td>
+            <td th:text="${dto.loanRequest.getSurname()}"></td>
+            <td th:text="${dto.loanRequest.getPatronymic()}"></td>
+            <td>
+                <span th:text="${dto.loanRequest.getPassportSeries()}"></span>
+                <span th:text="${dto.loanRequest.getPassportNumber()}"></span>
+            </td>
+            <td th:text="${dto.loanRequest.maritalStatus}"></td>
+            <td th:text="${dto.loanRequest.getRegistrationAddress()}"></td>
+            <td th:text="${dto.loanRequest.getPhoneNumber()}"></td>
+            <td>
+                <span th:text="${#dates.format(dto.loanRequest.getDayEmployment(), 'dd.MM.yyyy')}"></span>
+                <span th:text="${#dates.format(dto.loanRequest.getDayDismissal(), 'dd.MM.yyyy')}"></span>
+            </td>
+            <td>
+                <span th:text="${dto.loanRequest.getJobPosition()}"></span>
+                <span th:text="${dto.loanRequest.getOrganizationName()}"></span>
+            </td>
+            <td th:text="${dto.loanRequest.getLoanAmount()}"></td>
+            <td>
+                <span th:if="${dto.requestDecision.isDecision()} == true">Одобрен</span>
+                <span th:if="${dto.requestDecision.isDecision()} == false">Не одобрен</span>
+            </td>
+            <td th:text="${dto.requestDecision.getLoanDays()}"></td>
+            <td th:text="${#numbers.formatDecimal(dto.getRequestDecision().getApprovedLoanAmount(),0 , 3)}"></td>
+        </tr>
+    </table>
+</body>
+</html>

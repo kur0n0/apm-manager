@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+</head>
+<body>
+    <header th:insert="navbar :: header"></header>
+    <div>
+        <p>Поиск по полю: <p th:text="${radioType}"></p>
+        </p>
+        <p>Введенные данные: <p th:text="${data}"></p>
+        </p>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Данные паспорта</th>
+            <th scope="col">Семейное положение</th>
+            <th scope="col">Адрес прописки</th>
+            <th scope="col">Номер телефона</th>
+            <th scope="col">Период работы</th>
+            <th scope="col">
+                <span>Должность</span>
+                <span>Название организации</span>
+            </th>
+            <th scope="col">Сумма желаемого кредита</th>
+        </tr>
+        </thead>
+        <tr th:each="loan : ${loanRequest}">
+            <td th:text="${loan.getId()}"></td>
+            <td th:text="${loan.getName()}"></td>
+            <td th:text="${loan.getSurname()}"></td>
+            <td th:text="${loan.getPatronymic()}"></td>
+            <td>
+                <span th:text="${loan.getPassportSeries()}"></span>
+                <span th:text="${loan.getPassportNumber()}"></span>
+            </td>
+            <td th:text="${loan.maritalStatus}"></td>
+            <td th:text="${loan.getRegistrationAddress()}"></td>
+            <td th:text="${loan.getPhoneNumber()}"></td>
+            <td>
+                <span th:text="${#dates.format(loan.getDayEmployment(), 'dd.MM.yyyy')}"></span>
+                <span th:text="${#dates.format(loan.getDayDismissal(), 'dd.MM.yyyy')}"></span>
+            </td>
+            <td>
+                <span th:text="${loan.getJobPosition()}"></span>
+                <span th:text="${loan.getOrganizationName()}"></span>
+            </td>
+            <td th:text="${loan.getLoanAmount()}"></td>
+        </tr>
+    </table>
+</body>
+</html>

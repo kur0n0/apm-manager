@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS Requests(
+     Id SERIAL PRIMARY KEY NOT NULL,
+     Name VARCHAR(50) NOT NULL,
+     Surname VARCHAR(50) NOT NULL,
+     Patronymic VARCHAR(50) NOT NULL,
+     PassportSeries VARCHAR(4) NOT NULL,
+     PassportNumber VARCHAR(6) NOT NULL,
+     MaritalStatus VARCHAR(15),
+     RegistrationAddress VARCHAR(50) NOT NULL,
+     PhoneNumber VARCHAR(12) NOT NULL,
+     DayEmployment DATE,
+     DayDismissal DATE,
+     JobPosition VARCHAR(25),
+     OrganizationName VARCHAR(50),
+     LoanAmount DECIMAL NOT NULL
+);

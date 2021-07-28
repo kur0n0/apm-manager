@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+</head>
+<body>
+    <header th:insert="navbar :: header"></header>
+    <p class="p-3 m-3">Поиск по фио будет работать, елси писать данные в порядке: имя, фамилия, отчество</p>
+    <p class="p-3 m-3">А поиск по пасспорту в последовательности: серия, номер</p>
+    <div class="container">
+        <div class="card-body">
+            <h2>Поиск</h2>
+            <form action="#" th:action="@{Search/{type}/{data}}" method="post">
+                <div class="form-group row">
+                    <label class="radio-inline col text-center">
+                        <input class="form-control" type="radio" name="radioType" value="phoneNumber">Поиск по телефонному номеру
+                    </label>
+                    <label class="radio-inline col text-center">
+                        <input class="form-control" type="radio" name="radioType" value="fio">Поиск по имени фамилии и отчеству
+                    </label>
+                    <label class="radio-inline col text-center">
+                        <input class="form-control" type="radio" name="radioType" value="passportData">Поиск по паспортным данным
+                    </label>
+                    <input class="form-control" type="text" placeholder="Введите данные" name="data">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

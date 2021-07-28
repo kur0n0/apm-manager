@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+</head>
+<body>
+    <header th:insert="navbar :: header"></header>
+    <h1>Список всех клиентов</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Данные паспорта</th>
+            <th scope="col">Семейное положение</th>
+            <th scope="col">Адрес прописки</th>
+            <th scope="col">Номер телефона</th>
+            <th scope="col">Период работы</th>
+            <th scope="col">
+                <span>Должность</span>
+                <span>Название организации</span>
+            </th>
+            <th scope="col">Сумма желаемого кредита</th>
+
+        </tr>
+        </thead>
+        <tr th:each="client : ${allClients}">
+            <td th:text="${client.getId()}"></td>
+            <td th:text="${client.getName()}"></td>
+            <td th:text="${client.getSurname()}"></td>
+            <td th:text="${client.getPatronymic()}"></td>
+            <td>
+                <span th:text="${client.getPassportSeries()}"></span>
+                <span th:text="${client.getPassportNumber()}"></span>
+            </td>
+            <td th:text="${client.maritalStatus}"></td>
+            <td th:text="${client.getRegistrationAddress()}"></td>
+            <td th:text="${client.getPhoneNumber()}"></td>
+            <td>
+                <span th:text="${#dates.format(client.getDayEmployment(), 'dd.MM.yyyy')}"></span>
+                <span th:text="${#dates.format(client.getDayDismissal(), 'dd.MM.yyyy')}"></span>
+            </td>
+            <td>
+                <span th:text="${client.getJobPosition()}"></span>
+                <span th:text="${client.getOrganizationName()}"></span>
+            </td>
+            <td th:text="${client.getLoanAmount()}"></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+</head>
+<body>
+    <header th:insert="navbar :: header"></header>
+    <h1>Подписание контрактов</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Отчество</th>
+                <th scope="col">Данные паспорта</th>
+                <th scope="col">Семейное положение</th>
+                <th scope="col">Адрес прописки</th>
+                <th scope="col">Номер телефона</th>
+                <th scope="col">Период работы</th>
+                <th scope="col">
+                    <span>Должность</span>
+                    <span>Название организации</span>
+                </th>
+                <th scope="col">Сумма желаемого кредита</th>
+                <th scope="col">Дата подписи</th>
+                <th scope="col">Статус подписи</th>
+                <th scope="col">Подписать</th>
+            </tr>
+        </thead>
+        <tr th:each="contractDto : ${contractDtoList}">
+            <td th:text="${contractDto.loanRequest.getId()}"></td>
+            <td th:text="${contractDto.getLoanRequest().getName()}"></td>
+            <td th:text="${contractDto.getLoanRequest().getSurname()}"></td>
+            <td th:text="${contractDto.getLoanRequest().getPatronymic()}"></td>
+            <td>
+                <span th:text="${contractDto.getLoanRequest().getPassportSeries()}"></span>
+                <span th:text="${contractDto.getLoanRequest().getPassportNumber()}"></span>
+            </td>
+            <td th:text="${contractDto.getLoanRequest().maritalStatus}"></td>
+            <td th:text="${contractDto.getLoanRequest().getRegistrationAddress()}"></td>
+            <td th:text="${contractDto.getLoanRequest().getPhoneNumber()}"></td>
+            <td>
+                <span th:text="${#dates.format(contractDto.getLoanRequest().getDayEmployment(), 'dd.MM.yyyy')}"></span>
+                <span th:text="${#dates.format(contractDto.getLoanRequest().getDayDismissal(), 'dd.MM.yyyy')}"></span>
+            </td>
+            <td>
+                <span th:text="${contractDto.getLoanRequest().getJobPosition()}"></span>
+                <span th:text="${contractDto.getLoanRequest().getOrganizationName()}"></span>
+            </td>
+            <td th:text="${contractDto.getLoanRequest().getLoanAmount()}"></td>
+            <td th:text="${#dates.format(contractDto.getLoanContract().getSignDate(), 'dd.MM.yyyy') ?: 'Еще не был подписан'}"></td>
+            <td>
+                <span th:if="${contractDto.getLoanContract().isSigned() == true}">Подписан</span>
+                <span th:if="${contractDto.getLoanContract().isSigned() == false}"> Не подписан</span>
+            </td>
+            <td>
+                <a th:href="@{LoanContract/sign/{id}(id=${contractDto.getLoanRequest().id})}">Подписать</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
